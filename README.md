@@ -4,7 +4,7 @@
  [![Build Status](https://travis-ci.org/laguer/maths-with-python.svg?branch=master)](https://travis-ci.org/laguer/maths-with-python) 
  [![codecov](https://codecov.io/gh/laguer/maths-with-python/branch/master/graph/badge.svg)](https://codecov.io/gh/laguer/maths-with-python) 
  [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/LaGuer/maths-with-python)
- [![nbviewer](https://img.shields.io/badge/view%20on-nbviewer-brightgreen.svg)](https://nbviewer.jupyter.org/github/LaGuer/Jupyter-Notebook-Practice-Physical-Constants-Ratios/blob/master/Jupyter-Notebook%20Practice%20Physical%20Constants%20Ratios.ipynb)
+ [![nbviewer](https://img.shields.io/badge/view%20on-nbviewer-brightgreen.svg)](https://nbviewer.jupyter.org/github/LaGuer/maths-with-python.ipynb)
 
 [![Documentation Status](https://readthedocs.org/projects/maths-with-python/badge/?version=latest)](http://maths-with-python.readthedocs.org/en/latest/?badge=latest)
 
