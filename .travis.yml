@@ -29,7 +29,7 @@ before_install:
         HOMEBREW_NO_AUTO_UPDATE=1 brew tap minrk/homebrew-python-frameworks
         HOMEBREW_NO_AUTO_UPDATE=1 brew cask install python-framework-${TRAVIS_PYTHON_VERSION/./}
       fi
-      python3 -m pip install virtualenv
+#      python3 -m pip install virtualenv
       python3 -m virtualenv -p $(which python$TRAVIS_PYTHON_VERSION) ~/travis-env
       source ~/travis-env/bin/activate
     fi
@@ -60,6 +60,7 @@ script:
     fi
 
 after_success:
+  - cd docs && ls -
   - cp /tmp/ipy_coverage.xml ./
   - cp /tmp/.coverage ./
   - codecov
@@ -67,7 +68,7 @@ after_success:
 matrix:
   include:
     - python: "3.5"
-      dist: xenial
+      dist: cosmic
       sudo: true
     - python: "3.7"
       dist: xenial
@@ -80,7 +81,7 @@ matrix:
       sudo: true
     - os: osx
       language: generic
-      python: 3.6
+      python: 3.5
       env: TRAVIS_PYTHON_VERSION=3.5
     - os: osx
       language: generic
