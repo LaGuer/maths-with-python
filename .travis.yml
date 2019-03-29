@@ -9,8 +9,9 @@ addons:
       - pandoc
 
 python:
-    - 3.5
     - 3.6
+    - 3.7
+    - 3.8-dev
 
 sudo: false
 
@@ -38,8 +39,8 @@ before_install:
 install:
   - pip install pip --upgrade
   - pip install setuptools --upgrade
-  - pip install scipy[test] --upgrade
-  - pip install trio curio
+#  - pip install scipy[test] --upgrade
+#  - pip install trio curio
 #  - pip install codecov check-manifest --upgrade
 
 script:
@@ -79,10 +80,6 @@ matrix:
       sudo: true
     - os: osx
       language: generic
-      python: 3.5
-      env: TRAVIS_PYTHON_VERSION=3.5
-    - os: osx
-      language: generic
       python: 3.6
       env: TRAVIS_PYTHON_VERSION=3.6
     - os: osx
@@ -94,7 +91,7 @@ matrix:
       python: 3.8-dev
       env: TRAVIS_PYTHON_VERSION=3.8-dev
   allow_failures:
-    - python: nightly
+    - python: 3.7
     - python: 3.8-dev
 
 before_deploy:
