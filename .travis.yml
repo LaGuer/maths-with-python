@@ -31,7 +31,7 @@ install:
 
 # commands to run tests
 script:
-  - coverage run --source=primefinders -m unittest
+  - coverage run --source=maths-with-python -m unittest
   - coverage xml # For Codacy
 
 deploy:
@@ -43,7 +43,7 @@ deploy:
     tags: true
 
 after_success:
-  - pip install nprime
+  - pip install maths-with-python
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT    # Code Climate code coverage
   - codecov                                                           # Codecov code coverage
   - python-codacy-coverage -r coverage.xml                            # Codacy code coverage
