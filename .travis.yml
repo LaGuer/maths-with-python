@@ -9,8 +9,8 @@ addons:
       - pandoc
 
 python:
-    - 3.7
     - 3.6
+    - 3.5
 
 sudo: false
 
@@ -29,7 +29,7 @@ before_install:
         HOMEBREW_NO_AUTO_UPDATE=1 brew tap minrk/homebrew-python-frameworks
         HOMEBREW_NO_AUTO_UPDATE=1 brew cask install python-framework-${TRAVIS_PYTHON_VERSION/./}
       fi
-#      python3 -m pip install virtualenv
+      python3 -m pip install virtualenv
       python3 -m virtualenv -p $(which python$TRAVIS_PYTHON_VERSION) ~/travis-env
       source ~/travis-env/bin/activate
     fi
@@ -40,9 +40,8 @@ install:
   - pip install setuptools --upgrade
   - pip install scipy[test] --upgrade
   - pip install trio curio
-  - pip install codecov
 #  - pip install codecov check-manifest --upgrade
-  
+
 script:
 #  - check-manifest
   - |
@@ -59,26 +58,20 @@ script:
       python conf.py
       make -C docs/ html SPHINXOPTS="-W"
     fi
-
 after_success:
-  - cp docs/*.* /tmp && ls -
-  - cp /tmp/*.xml ./
-  - ls & pwd -
-  - coverage xml
   - cp /tmp/ipy_coverage.xml ./
   - cp /tmp/.coverage ./
   - codecov
 
-
 matrix:
   include:
     - python: "3.5"
-      dist: cosmic
+      dist: xenial
       sudo: true
     - python: "3.7"
       dist: xenial
       sudo: true
-    - python: "3.8-dev"
+    - python: "3.7-dev"
       dist: xenial
       sudo: true
     - python: "nightly"
@@ -87,21 +80,20 @@ matrix:
     - os: osx
       language: generic
       python: 3.6
+      env: TRAVIS_PYTHON_VERSION=3.5
+    - os: osx
+      language: generic
+      python: 3.6
       env: TRAVIS_PYTHON_VERSION=3.6
     - os: osx
       language: generic
       python: 3.7
       env: TRAVIS_PYTHON_VERSION=3.7
-    - os: osx
-      language: generic
-      python: 3.8-dev
-      env: TRAVIS_PYTHON_VERSION=3.8-dev
   allow_failures:
     - python: nightly
-    - python: 3.8-dev
+    - python: 3.7
 
 before_deploy:
-  - ls -lart dist/ && ls -lart /tmp
   - rm -rf dist/
   - python run_notebooks.py
 
@@ -119,4 +111,3 @@ deploy:
     tags: true
     python: 3.6  # Any version should work, but we only need one
     condition: $TRAVIS_OS_NAME = "linux"
-
