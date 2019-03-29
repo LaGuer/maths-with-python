@@ -96,11 +96,11 @@ matrix:
       env: TRAVIS_PYTHON_VERSION=3.7
     - os: osx
       language: generic
-      python: 3.8
-      env: TRAVIS_PYTHON_VERSION=3.8
+      python: 3.8-dev
+      env: TRAVIS_PYTHON_VERSION=3.8-dev
   allow_failures:
     - python: nightly
-    - python: 3.8
+    - python: 3.8-dev
 
 before_deploy:
   - ls -lart dist/ && ls -lart /tmp
