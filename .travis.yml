@@ -30,7 +30,7 @@ install:
 #  - python setup.py install
 
 # commands to run tests
-script:
+#script:
 #  - coverage run --source=maths-with-python -m unittest
 #  - coverage xml # For Codacy
 
@@ -46,5 +46,5 @@ after_success:
   - pip install maths-with-python
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT    # Code Climate code coverage
   - codecov                                                           # Codecov code coverage
-  - python-codacy-coverage -r coverage.xml                            # Codacy code coverage
+#  - python-codacy-coverage -r coverage.xml                            # Codacy code coverage
 
