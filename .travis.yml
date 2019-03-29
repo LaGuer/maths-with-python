@@ -40,8 +40,8 @@ install:
   - pip install setuptools --upgrade
 #  - pip install scipy[test] --upgrade
 #  - pip install trio curio
-#  - pip install codecov check-manifest --upgrade
-
+  - pip install codecov 
+  
 script:
 #  - check-manifest
   - |
@@ -51,11 +51,12 @@ script:
     fi
   - cd /tmp &&  cd -
   - ls && pwd -
+  - coverage run tests.py
   # On the latest Python (on Linux) only, make sure that the docs build.
   - |
     if [[ "$TRAVIS_PYTHON_VERSION" == "3.8-dev" ]] && [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       pip install -r requirements.txt
-      python conf.py
+      coverage run test.py
       make -C docs/ html SPHINXOPTS="-W"
     fi
 after_success:
