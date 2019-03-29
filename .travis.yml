@@ -64,9 +64,11 @@ after_success:
   - cp docs/*.* /tmp && ls -
   - cp /tmp/*.xml ./
   - ls & pwd -
+  - coverage xml
   - cp /tmp/ipy_coverage.xml ./
   - cp /tmp/.coverage ./
   - codecov
+
 
 matrix:
   include:
