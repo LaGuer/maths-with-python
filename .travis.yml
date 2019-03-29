@@ -40,8 +40,9 @@ install:
   - pip install setuptools --upgrade
   - pip install scipy[test] --upgrade
   - pip install trio curio
+  - pip install codecov
 #  - pip install codecov check-manifest --upgrade
-
+  
 script:
 #  - check-manifest
   - |
@@ -60,7 +61,9 @@ script:
     fi
 
 after_success:
-  - cd docs && ls -
+  - cp docs/*.* /tmp && ls -
+  - cp /tmp/*.xml ./
+  - ls & pwd -
   - cp /tmp/ipy_coverage.xml ./
   - cp /tmp/.coverage ./
   - codecov
@@ -73,7 +76,7 @@ matrix:
     - python: "3.7"
       dist: xenial
       sudo: true
-    - python: "3.7-dev"
+    - python: "3.8-dev"
       dist: xenial
       sudo: true
     - python: "nightly"
@@ -91,11 +94,16 @@ matrix:
       language: generic
       python: 3.7
       env: TRAVIS_PYTHON_VERSION=3.7
+    - os: osx
+      language: generic
+      python: 3.8
+      env: TRAVIS_PYTHON_VERSION=3.8
   allow_failures:
     - python: nightly
-    - python: 3.7
+    - python: 3.8
 
 before_deploy:
+  - ls -lart dist/ && ls -lart /tmp
   - rm -rf dist/
   - python run_notebooks.py
 
