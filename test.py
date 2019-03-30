@@ -1,11 +1,11 @@
 import unittest
 
-import breakpoints
+import conf
 
 
 class TestMethods(unittest.TestCase):
     def test_add(self):
-        self.assertEqual(breakpoints(),)
+        self.assertEqual(conf(),)
 
 if __name__ == '__main__':
     unittest.main()
