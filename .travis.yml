@@ -1,9 +1,9 @@
 # http://travis-ci.org/#!/LaGuer/maths-with-python
 language: python
 python:
-     - "2.7.12"
      - "3.5"
      - "3.6"
+     - "3.7"
      - "nightly"
 
 install: 
@@ -12,7 +12,7 @@ install:
 
 script:
     - test.py tests/
-    - travis-sphinx --source build
+    - travis-sphinx --source ./docs build
 
 after_success:
     - travis-sphinx --branches=master,Develop deploy
