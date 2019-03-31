@@ -11,8 +11,8 @@ install:
     - sudo apt-get install pandoc
 
 script:
-    - py.test tests/
-    - travis-sphinx --source ./docs build
+    - test.py tests/
+    - travis-sphinx --source build
 
 after_success:
     - travis-sphinx --branches=master,Develop deploy
