@@ -1,116 +1,18 @@
 # http://travis-ci.org/#!/LaGuer/maths-with-python
 language: python
-os: linux
-
-addons:
-  apt:
-    packages:
-      - graphviz
-      - pandoc
-
 python:
-    - 3.6
-    - 3.8-dev
+     - "2.7.12"
+     - "3.5"
+     - "3.6"
+     - "nightly"
 
-sudo: false
+install: 
+    - pip install -r requirements.txt
+    - sudo apt-get install pandoc
 
-env:
-  global:
-    - PATH=$TRAVIS_BUILD_DIR/pandoc:$PATH
-
-group: edge
-
-before_install:
-  - |
-    # install Python on macOS
-    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      env | sort
-      if ! which python$TRAVIS_PYTHON_VERSION; then
-        HOMEBREW_NO_AUTO_UPDATE=1 brew tap minrk/homebrew-python-frameworks
-        HOMEBREW_NO_AUTO_UPDATE=1 brew cask install python-framework-${TRAVIS_PYTHON_VERSION/./}
-      fi
-      python3 -m pip install virtualenv
-      python3 -m virtualenv -p $(which python$TRAVIS_PYTHON_VERSION) ~/travis-env
-      source ~/travis-env/bin/activate
-    fi
-  - python --version
-
-install:
-  - pip install pip --upgrade
-  - pip install setuptools --upgrade
-#  - pip install scipy[test] --upgrade
-#  - pip install trio curio
-  - pip install codecov 
-  
 script:
-#  - check-manifest
-  - |
-    if [[ "$TRAVIS_PYTHON_VERSION" == "3.8-dev" ]]; then
-       # on nightly fake parso known the grammar
-       cp /home/travis/virtualenv/python3.8-dev/lib/python3.8/site-packages/parso/python/grammar37.txt /home/travis/virtualenv/python3.8-dev/lib/python3.8/site-packages/parso/python/grammar38.txt
-    fi
-  - cd /tmp &&  cd -
-  - ls && pwd -
-#  - coverage run test.py
-  - coverage run --source=primefinders -m unittest
-#  - coverage run --source=primefinders -m unittest -k tests
-  # On the latest Python (on Linux) only, make sure that the docs build.
-  - |
-    if [[ "$TRAVIS_PYTHON_VERSION" == "3.8-dev" ]] && [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      pip install -r requirements.txt
-      coverage run test.py
-      make -C docs/ html SPHINXOPTS="-W"
-    fi
+    - py.test tests/
+    - travis-sphinx --source ./docs build
+
 after_success:
-  - cp /tmp/ipy_coverage.xml ./
-  - cp /tmp/.coverage ./
-  - codecov
-
-matrix:
-  include:
-    - python: "3.5"
-      dist: xenial
-      sudo: true
-    - python: "3.6"
-      dist: xenial
-      sudo: true
-    - python: "3.7"
-      dist: xenial
-      sudo: true
-    - python: "3.8-dev"
-      dist: xenial
-      sudo: true
-    - os: osx
-      language: generic
-      python: 3.6
-      env: TRAVIS_PYTHON_VERSION=3.6
-    - os: osx
-      language: generic
-      python: 3.7
-      env: TRAVIS_PYTHON_VERSION=3.7
-    - os: osx
-      language: generic
-      python: 3.8-dev
-      env: TRAVIS_PYTHON_VERSION=3.8-dev
-  allow_failures:
-    - python: 3.7
-    - python: 3.8-dev
-
-before_deploy:
-  - rm -rf dist/
-  - python run_notebooks.py
-
-
-deploy:
-  provider: releases
-  api_key:
-    secure: Y/=
-  file: dist/*
-  file_glob: true
-  skip_cleanup: true
-  on:
-    repo: LaGuer/maths-with-python
-    all_branches: true  # Backports are released from e.g. 5.x branch
-    tags: true
-    python: 3.6  # Any version should work, but we only need one
-    condition: $TRAVIS_OS_NAME = "linux"
+    - travis-sphinx --branches=master,Develop deploy
