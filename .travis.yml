@@ -154,6 +154,7 @@ script:
       python conf.py
       make -C docs/ html SPHINXOPTS="-W"
     fi
+  - ls docs/ 
 after_success:
   - cp /tmp/ipy_coverage.xml ./
   - cp /tmp/.coverage ./
