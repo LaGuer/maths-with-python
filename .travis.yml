@@ -1,23 +1,4 @@
-# http://travis-ci.org/#!/LaGuer/maths-with-python
-language: python
-python:
-     - "3.5"
-     - "3.6"
-     - "3.7"
-     - "nightly"
-
-install: 
-    - pip install -r requirements.txt
-    - sudo apt-get install pandoc
-
-script:
-    - cd - && test_nb.py 
-#    - travis-sphinx --source ./ build
-
-after_success:
-    - travis-sphinx --branches=master,Develop deploy
-    
-    
+# http://travis-ci.org/#!/LaGuer/maths-with-python    
 language: python            # this works for Linux but is an error on macOS or Windows
 matrix:
   include:
