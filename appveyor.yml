@@ -54,7 +54,8 @@ on_success:
 #  - pytest --cov=splinart tests
   - codecov -e $PYTHON_VERSION
   - "%CMD_IN_ENV% python conf.py"
-  - "%CMD_IN_ENV% make -C docs/ html SPHINXOPTS="-W""
+  - "%CMD_IN_ENV% make -C"
+#  - "%CMD_IN_ENV% make -C docs/ html SPHINXOPTS="-W""
   - "%CMD_IN_ENV% ls docs/"
 
 #after_success:
