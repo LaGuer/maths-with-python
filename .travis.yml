@@ -122,8 +122,7 @@ install:
 #  - pip install -r requirements.txt
 #  - sudo find / -name "jupyter" -print
   - pip install -r requirements.txt
-  - pip3 install jupyter
-  - pip3 install nbformat
+  - pip3 install jupyter nbformat
   - jupyter nbextension enable --py widgetsnbextension
   
   
@@ -153,8 +152,23 @@ script:
       python conf.py
       make -C docs/ html SPHINXOPTS="-W"
     fi
-  - ls docs/ 
-after_success:
-  - cp /tmp/ipy_coverage.xml ./
-  - cp /tmp/.coverage ./
-  - codecov
+  - ls docs/
+  - cp *.ipynb docs/
+  - jupyter nbconvert slide-example.ipynb --to slides --reveal-prefix=docs
+  - jupyter nbconvert *.ipynb --to latex  --reveal-prefix=docs
+  
+after_success: |
+  if [ -n "$GITLAB_API_KEY" ]; then
+    git checkout --orphan gh-pages
+    git rm -rf --cached .
+    rm ./docs/index.html
+    cp *.html docs/
+    mv *.tex docs/
+    mv slide-example1_files docs/slide-example1_files
+    tectonic docs/test.tex --print && tectonic docs/slide-example1.tex --print 
+    git add -f --ignore-errors docs/index.html docs/
+    git -c user.name='travis' -c user.email='travis' commit -m init
+    git push -f -q https://$GITLAB_USER:$GITLAB_API_KEY@gitlab.com/$TRAVIS_REPO_SLUG gh-pages
+    codecov
+  fi
+
