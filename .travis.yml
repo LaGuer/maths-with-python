@@ -120,7 +120,7 @@ install:
 #  - pip install -U pip setuptools # Travis breaks without this
 #  - pip install -r requirements.txt
 #  - sudo find / -name "jupyter" -print
-  - $HOME/miniconda/bin/conda install -y -c anaconda jupyter
+  - $HOME/miniconda/bin/conda install -y -c anaconda jupyter runipy
   - $HOME/miniconda/bin/conda install -y -c conda-forge tectonic
   - pip install -r requirements.txt
 #  - pip3 install jupyter nbformat
