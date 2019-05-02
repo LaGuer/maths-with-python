@@ -1,0 +1,83 @@
+build: false
+matrix:
+  fast_finish: true     # immediately finish build once one of the jobs fails.
+
+environment:
+  matrix:
+   - PYTHON: "C:\\Python36"
+     PYTHON_VERSION: "3.6.x"
+     PYTHON_ARCH: "32"
+
+   - PYTHON: "C:\\Python36-x64"
+     PYTHON_VERSION: "3.6.x"
+     PYTHON_ARCH: "64"
+
+init:
+  - "ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%"
+
+install:
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - cmd: SET PATH=%CONDA_INSTALL_LOCN%;%CONDA_INSTALL_LOCN%\Scripts;%PATH%
+  - cmd: conda config --set always_yes true
+  - cmd: conda update --quiet conda
+  - cmd: conda install -y -c anaconda jupyter
+  - cmd: conda install -y -c conda-forge tectonic
+  
+  
+  
+#  - "%CMD_IN_ENV%  conda install -y -c anaconda jupyter"
+#  - $HOME/miniconda/bin/conda install -y -c conda-forge jupyter_latex_envs nbformat tectonic
+#  - $HOME/miniconda/bin/conda install -y -c conda-forge nbformat
+  - "%CMD_IN_ENV%  python -m pip install --upgrade setuptools pip"
+  - "%CMD_IN_ENV%  pip install wget jupyter nose coverage pytest pylint pytest-pylint pytest-cov codecov"
+  - "%CMD_IN_ENV%  jupyter nbextension enable --py widgetsnbextension"
+#  - "%CMD_IN_ENV%  python -m wget https://github.com/laguer/slideshow/archive/3.8.0.zip"
+  - "%CMD_IN_ENV%  ls"
+#  - "%CMD_IN_ENV%  unzip slideshow-3.8.0.zip"
+#  - "%CMD_IN_ENV%  mv slideshow-3.8.0 slideshow"
+#  - "%CMD_IN_ENV%  pip install nose coverage"
+#  - "%CMD_IN_ENV%  pip install .[test]"
+#  - "%CMD_IN_ENV%  pip install pytest"
+#  - "%CMD_IN_ENV%  mkdir results"
+#  - "%CMD_IN_ENV%  cd results"
+#  - "%CMD_IN_ENV%  cd ~"
+  - "%CMD_IN_ENV%  ls"
+  
+test_script:
+  - "%CMD_IN_ENV%  python test_nb.py  || python test_nb.py || python test_nb.py"
+  - jupyter nbconvert test.ipynb --to slides --reveal-prefix=docs
+  - "%CMD_IN_ENV% echo $GITLAB_USER"
+#  - pytest --pylint --pylint-rcfile=.pyrcfile --pylint-error-types=EF 
+
+on_success:
+  - pytest --pylint --pylint-rcfile=.pyrcfile --pylint-error-types=EF
+#  - pytest --cov=splinart tests
+  - codecov -e $PYTHON_VERSION
+  - "%CMD_IN_ENV% python conf.py"
+  - "%CMD_IN_ENV% make -C docs/ html SPHINXOPTS="-W""
+  - "%CMD_IN_ENV% ls docs/"
+
+#after_success:
+#  - |
+#  - if [ -n "\$GITHUB_API_KEY" ]; then
+#  - git checkout --orphan gh-pages
+#  - git rm -rf --cached .
+#  - mv slide-example.slides.html index.html
+#  - git add -f --ignore-errors index.html reveal.js
+#  - git -c user.name='appveyor' -c user.email='appveyor' commit -m init
+#  - git push -f -q https://$GITHUB_USER:$GITHUB_API_KEY@github.com/$TRAVIS_REPO_SLUG gh-pages
+#  - fi
+#  - "%CMD_IN_ENV% |
+#    if [ -n "$GITLAB_API_KEY" ]; then
+#      git checkout --orphan gh-pages
+#      git rm -rf --cached .
+#      rm ./slideshow/index.html
+#      cp slide-example.slides.html slideshow/index.html
+#      cp slide-example1.tex slideshow/slide-example1.tex
+#      mv slide-example1_files slideshow/slide-example1_files
+#      tectonic slideshow/slide-example1.tex --print
+#      git add -f --ignore-errors slideshow/index.html slideshow/
+#      git -c user.name='travis' -c user.email='travis' commit -m init
+#      git push -f -q https://$GITLAB_USER:$GITLAB_API_KEY@gitlab.com/$TRAVIS_REPO_SLUG gh-pages
+#      codecov
+#    fi"
