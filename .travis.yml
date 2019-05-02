@@ -154,7 +154,7 @@ script:
       make -C docs/ html SPHINXOPTS="-W"
     fi
   - python conf.py
-  - make -C docs/ html SPHINXOPTS="-W"
+  - make #-C docs/ html SPHINXOPTS="-W"
   - ls docs/
 #  - cp *.ipynb docs/
 #  - jupyter nbconvert index.ipynb --to slides --reveal-prefix=docs
