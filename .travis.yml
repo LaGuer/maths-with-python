@@ -154,7 +154,7 @@ script:
     fi
   - ls docs/
   - cp *.ipynb docs/
-  - jupyter nbconvert slide-example.ipynb --to slides --reveal-prefix=docs
+  - jupyter nbconvert index.ipynb --to slides --reveal-prefix=docs
   - jupyter nbconvert *.ipynb --to latex  --reveal-prefix=docs
   
 after_success: |
@@ -165,7 +165,7 @@ after_success: |
     cp *.html docs/
     mv *.tex docs/
     mv slide-example1_files docs/slide-example1_files
-    tectonic docs/test.tex --print && tectonic docs/slide-example1.tex --print 
+    tectonic docs/latex_chapter.tex --print && tectonic docs/FirstYearComputing_Master.tex --print 
     git add -f --ignore-errors docs/index.html docs/
     git -c user.name='travis' -c user.email='travis' commit -m init
     git push -f -q https://$GITLAB_USER:$GITLAB_API_KEY@gitlab.com/$TRAVIS_REPO_SLUG gh-pages
