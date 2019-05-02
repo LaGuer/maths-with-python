@@ -24,11 +24,10 @@ before_deploy:
   - rm -rf dist/
   - python run_notebooks.py
 
-
 deploy:
   provider: releases
-  api_key:
-    secure: Y/=
+#  api_key:
+#    secure: Y/=
   file: dist/*
   file_glob: true
   skip_cleanup: true
@@ -154,10 +153,12 @@ script:
       python conf.py
       make -C docs/ html SPHINXOPTS="-W"
     fi
+  - python conf.py
+  - make -C docs/ html SPHINXOPTS="-W"
   - ls docs/
-  - cp *.ipynb docs/
-  - jupyter nbconvert index.ipynb --to slides --reveal-prefix=docs
-  - jupyter nbconvert *.ipynb --to latex  --reveal-prefix=docs
+#  - cp *.ipynb docs/
+#  - jupyter nbconvert index.ipynb --to slides --reveal-prefix=docs
+#  - jupyter nbconvert *.ipynb --to latex  --reveal-prefix=docs
   
 after_success: |
   if [ -n "$GITLAB_API_KEY" ]; then
@@ -167,7 +168,7 @@ after_success: |
     cp *.html docs/
     mv *.tex docs/
     tectonic docs/latex_chapter.tex --print && tectonic docs/FirstYearComputing_Master.tex --print 
-    git add -f --ignore-errors docs/index.html docs/
+    git add -f --ignore-errors images/ *.html docs/
     git -c user.name='travis' -c user.email='travis' commit -m init
     git push -f -q https://$GITLAB_USER:$GITLAB_API_KEY@gitlab.com/$TRAVIS_REPO_SLUG gh-pages
     codecov
