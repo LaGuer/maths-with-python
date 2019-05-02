@@ -18,6 +18,7 @@ init:
 install:
   - "SET PATH=%CONDA_INSTALL_LOCN%;%PYTHON%;%PYTHON%\\Scripts;%PATH%"
 #  - cmd: SET PATH=%CONDA_INSTALL_LOCN%;%CONDA_INSTALL_LOCN%\Scripts;%PATH%
+  - "%CMD_IN_ENV% choco install miniconda3 ; pip install pandoc"
   - "%CMD_IN_ENV%  conda config --set always_yes true"
   - "%CMD_IN_ENV%  conda update --quiet conda"
   - "%CMD_IN_ENV%  conda install -y -c anaconda jupyter"
