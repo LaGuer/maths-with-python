@@ -11,11 +11,11 @@ matrix:
       os: osx
       osx_image: xcode10.2  # Python 3.7.2 running on macOS 10.14.3
       language: shell       # 'language: python' is an error on Travis CI macOS
-      before_install: wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh ; bash miniconda.sh -b -p $HOME/miniconda -f -u ; conda install -y -c anaconda pandoc 
+      before_install: wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh ; bash miniconda.sh -b -p $HOME/miniconda -f -u; pip install pandoc #; conda install -y -c anaconda pandoc 
     - name: "Python 3.7.3 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
       language: shell       # 'language: python' is an error on Travis CI Windows
-      before_install: choco install python ;  choco install miniconda3; conda install -y -c anaconda pandoc 
+      before_install: choco install python ;  choco install miniconda3 #; conda install -y -c anaconda pandoc 
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
   allow_failures:
     - os: windows
