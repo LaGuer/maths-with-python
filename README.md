@@ -1,7 +1,8 @@
 # Maths with Python
 
  [![PyPI version](https://badge.fury.io/py/maths-with-python.svg)](https://badge.fury.io/py/maths-with-python) 
- [![Build Status](https://travis-ci.org/LaGuer/maths-with-python.svg?branch=master)](https://travis-ci.org/LaGuer/maths-with-python) 
+ [![Build Status](https://travis-ci.org/LaGuer/maths-with-python.svg?branch=master)](https://travis-ci.org/LaGuer/maths-with-python)
+[![Build status](https://ci.appveyor.com/api/projects/status/je4xpa3948d05g1a/branch/master?svg=true)](https://ci.appveyor.com/project/LaGuer/maths-with-python/branch/master)
  [![codecov](https://codecov.io/gh/LaGuer/maths-with-python/branch/master/graph/badge.svg)](https://codecov.io/gh/LaGuer/maths-with-python) 
  [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/LaGuer/maths-with-python)
  [![nbviewer](https://img.shields.io/badge/view%20on-nbviewer-brightgreen.svg)](https://nbviewer.jupyter.org/github/LaGuer/maths-with-python/blob/master/website-index.ipynb)
