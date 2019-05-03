@@ -3,7 +3,6 @@ from runipy.notebook_runner import NotebookRunner
 #from nbformat import read
 from IPython.nbformat.current import write
 from IPython.nbformat.current import read
-f
 from glob import glob
 
 files = glob("./[01]*ipynb")
