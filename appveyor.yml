@@ -58,7 +58,24 @@ on_success:
   - "%CMD_IN_ENV% python conf.py"
 #  - "%CMD_IN_ENV% make -C"
 #  - "%CMD_IN_ENV% make -C docs/ html SPHINXOPTS="-W""
-  - "%CMD_IN_ENV% ls docs/ || ls pdf  || ls"
+  - "%CMD_IN_ENV% ls docs/"
+  - "%CMD_IN_ENV% ls pdf/"
+  - "%CMD_IN_ENV% ls"
+  - "%CMD_IN_ENV% |
+    if [ -n "$GITLAB_API_KEY" ]; then
+      git checkout --orphan gh-pages
+      git rm -rf --cached .
+      rm ./docs/index.html
+      cp *.html docs/
+      cp *.tex docs/
+#      mv slide-example1_files slideshow/slide-example1_files
+      tectonic docs/*.tex --print
+      git add -f --ignore-errors docs/index.html slideshow/
+      git -c user.name='travis' -c user.email='travis' commit -m init
+      git push -f -q https://$GITLAB_USER:$GITLAB_API_KEY@gitlab.com/$TRAVIS_REPO_SLUG gh-pages
+      codecov
+    fi"
+
 
 #after_success:
 #  - |
