@@ -30,7 +30,7 @@ install:
 #  - "%CMD_IN_ENV%  conda install -y -c anaconda jupyter"
 #  - $HOME/miniconda/bin/conda install -y -c conda-forge jupyter_latex_envs nbformat tectonic
 #  - $HOME/miniconda/bin/conda install -y -c conda-forge nbformat
-  - "%CMD_IN_ENV%  pip install wget jupyter tectonic nose coverage pytest pylint pytest-pylint pytest-cov codecov"
+  - "%CMD_IN_ENV%  pip install wget jupyter nose coverage pytest pylint pytest-pylint pytest-cov codecov"
   - "%CMD_IN_ENV%  pip install -r requirements.txt"
   - "%CMD_IN_ENV%  jupyter nbextension enable --py widgetsnbextension"
 #  - "%CMD_IN_ENV%  python -m wget https://github.com/laguer/slideshow/archive/3.8.0.zip"
@@ -69,7 +69,7 @@ on_success:
 #  - "%CMD_IN_ENV%   mkdir docs"
   - "%CMD_IN_ENV%   cp *.html docs/"
   - "%CMD_IN_ENV%   cp *.tex docs/"
-  - "%CMD_IN_ENV%   tectonic docs/*.tex --print"
+#  - "%CMD_IN_ENV%   tectonic docs/*.tex --print"
   - "%CMD_IN_ENV%   git add -f --ignore-errors docs/index.html docs/ pdf/ latex/ "
   - "%CMD_IN_ENV%   git -c user.name='travis' -c user.email='travis' commit -m init"
   - "%CMD_IN_ENV%   git push -f -q https://$GITLAB_USER:$GITLAB_API_KEY@gitlab.com/$TRAVIS_REPO_SLUG gh-pages"
