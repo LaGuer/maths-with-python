@@ -6,7 +6,9 @@ jupyter
 nbconvert
 pandoc
 nbsphinx
-IPython
+IPython>=5.0
 ipykernel
 pytest
 matplotlib
+numpy
+runipy
