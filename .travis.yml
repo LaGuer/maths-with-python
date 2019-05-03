@@ -97,8 +97,7 @@ before_install:
 
 install: 
   - pip install --upgrade pip  # all three OSes agree about 'pip3'
-  - pip install utils
-  - pip install pytest
+  - pip install utils pytest
   - python --version
 #  - bash miniconda.sh -b -p $HOME/miniconda -f -u
   - export PATH="$HOME/miniconda/bin:$PATH"
@@ -153,8 +152,7 @@ script:
       python conf.py
       make -C docs/ html SPHINXOPTS="-W"
     fi
-  - python conf.py
-  - make #-C docs/ html SPHINXOPTS="-W"
+#  - make #-C docs/ html SPHINXOPTS="-W"
   - ls docs/
 #  - cp *.ipynb docs/
 #  - jupyter nbconvert index.ipynb --to slides --reveal-prefix=docs
@@ -163,6 +161,7 @@ script:
 after_success: |
   if [ -n "$GITLAB_API_KEY" ]; then
     git checkout --orphan gh-pages
+    python conf.py
     git rm -rf --cached .
     rm ./docs/index.html
     cp *.html docs/
