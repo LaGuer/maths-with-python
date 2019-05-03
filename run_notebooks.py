@@ -1,4 +1,5 @@
 from runipy.notebook_runner import NotebookRunner
+import nbformat
 from IPython.nbformat.current import read
 from glob import glob
 
@@ -9,6 +10,6 @@ for file in files:
     notebook = read(open(file), 'json')
     r = NotebookRunner(notebook)
     r.run_notebook(skip_exceptions=True)
-    from IPython.nbformat.current import write
+#    nbformat.current import write
     write(r.nb, open("_runipy/"+file, 'w'), 'json')
     print("Done file {}".format(file))
