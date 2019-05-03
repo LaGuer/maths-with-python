@@ -22,15 +22,15 @@ install:
   - "%CMD_IN_ENV%  python -m pip install --upgrade setuptools pip"
 #  - "%CMD_IN_ENV%  conda config --set always_yes true"
 #  - "%CMD_IN_ENV%  conda update --quiet conda"
-  - "%CMD_IN_ENV%  conda install -y -c anaconda jupyter pandoc"
-  - "%CMD_IN_ENV%  conda install -y -c conda-forge tectonic"
+#  - "%CMD_IN_ENV%  conda install -y -c anaconda jupyter pandoc"
+#  - "%CMD_IN_ENV%  conda install -y -c conda-forge tectonic"
   
   
   
 #  - "%CMD_IN_ENV%  conda install -y -c anaconda jupyter"
 #  - $HOME/miniconda/bin/conda install -y -c conda-forge jupyter_latex_envs nbformat tectonic
 #  - $HOME/miniconda/bin/conda install -y -c conda-forge nbformat
-  - "%CMD_IN_ENV%  pip install wget nose coverage pytest pylint pytest-pylint pytest-cov codecov"
+  - "%CMD_IN_ENV%  pip install wget jupyter pandoc nose coverage pytest pylint pytest-pylint pytest-cov codecov"
   - "%CMD_IN_ENV%  jupyter nbextension enable --py widgetsnbextension"
 #  - "%CMD_IN_ENV%  python -m wget https://github.com/laguer/slideshow/archive/3.8.0.zip"
   - "%CMD_IN_ENV%  ls"
