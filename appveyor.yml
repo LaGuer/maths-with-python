@@ -30,7 +30,8 @@ install:
 #  - "%CMD_IN_ENV%  conda install -y -c anaconda jupyter"
 #  - $HOME/miniconda/bin/conda install -y -c conda-forge jupyter_latex_envs nbformat tectonic
 #  - $HOME/miniconda/bin/conda install -y -c conda-forge nbformat
-  - "%CMD_IN_ENV%  pip install wget jupyter pandoc numpy runipy nose coverage pytest pylint pytest-pylint pytest-cov codecov"
+  - "%CMD_IN_ENV%  pip install wget jupyter nose coverage pytest pylint pytest-pylint pytest-cov codecov"
+  - "%CMD_IN_ENV%  pip install -r requirements.txt"
   - "%CMD_IN_ENV%  jupyter nbextension enable --py widgetsnbextension"
 #  - "%CMD_IN_ENV%  python -m wget https://github.com/laguer/slideshow/archive/3.8.0.zip"
   - "%CMD_IN_ENV%  ls"
@@ -51,13 +52,13 @@ test_script:
 #  - pytest --pylint --pylint-rcfile=.pyrcfile --pylint-error-types=EF 
 
 on_success:
-  - pytest --pylint --pylint-rcfile=.pyrcfile #--pylint-error-types=EF
+#  - pytest --pylint --pylint-rcfile=.pyrcfile #--pylint-error-types=EF
 #  - pytest --cov=splinart tests
   - codecov -e $PYTHON_VERSION
   - "%CMD_IN_ENV% python conf.py"
 #  - "%CMD_IN_ENV% make -C"
 #  - "%CMD_IN_ENV% make -C docs/ html SPHINXOPTS="-W""
-  - "%CMD_IN_ENV% ls docs/"
+  - "%CMD_IN_ENV% ls docs/ || ls pdf  || ls"
 
 #after_success:
 #  - |
