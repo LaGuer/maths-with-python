@@ -54,26 +54,26 @@ test_script:
 on_success:
 #  - pytest --pylint --pylint-rcfile=.pyrcfile #--pylint-error-types=EF
 #  - pytest --cov=splinart tests
-  - codecov -e $PYTHON_VERSION
+#  - codecov -e $PYTHON_VERSION
   - "%CMD_IN_ENV% python conf.py"
 #  - "%CMD_IN_ENV% make -C"
 #  - "%CMD_IN_ENV% make -C docs/ html SPHINXOPTS="-W""
   - "%CMD_IN_ENV% ls docs/"
   - "%CMD_IN_ENV% ls pdf/"
   - "%CMD_IN_ENV% ls"
-  - "%CMD_IN_ENV% |"
-    if [ -n "$GITLAB_API_KEY" ]; then
-      git checkout --orphan gh-pages
-      git rm -rf --cached .
-      rm ./docs/index.html
-      cp *.html docs/
-      cp *.tex docs/
-      tectonic docs/*.tex --print
-      git add -f --ignore-errors docs/index.html slideshow/
-      git -c user.name='travis' -c user.email='travis' commit -m init
-      git push -f -q https://$GITLAB_USER:$GITLAB_API_KEY@gitlab.com/$TRAVIS_REPO_SLUG gh-pages
-      codecov
-    fi
+  - "%CMD_IN_ENV% if [ -n "$GITLAB_API_KEY" ]; then"
+#    if [ -n "$GITLAB_API_KEY" ]; then
+  - "%CMD_IN_ENV%   git checkout --orphan gh-pages"
+  - "%CMD_IN_ENV%   git rm -rf --cached ."
+  - "%CMD_IN_ENV%   rm ./docs/index.html"
+  - "%CMD_IN_ENV%   cp *.html docs/"
+  - "%CMD_IN_ENV%   cp *.tex docs/"
+  - "%CMD_IN_ENV%   tectonic docs/*.tex --print"
+  - "%CMD_IN_ENV%   git add -f --ignore-errors docs/index.html docs/ pdf/ latex/ "
+  - "%CMD_IN_ENV%   git -c user.name='travis' -c user.email='travis' commit -m init"
+  - "%CMD_IN_ENV%   git push -f -q https://$GITLAB_USER:$GITLAB_API_KEY@gitlab.com/$TRAVIS_REPO_SLUG gh-pages"
+  - "%CMD_IN_ENV%   codecov -e $PYTHON_VERSION"
+  - "%CMD_IN_ENV%  fi"
 
 
 #after_success:
