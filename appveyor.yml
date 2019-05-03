@@ -61,7 +61,7 @@ on_success:
   - "%CMD_IN_ENV% ls docs/"
   - "%CMD_IN_ENV% ls pdf/"
   - "%CMD_IN_ENV% ls"
-  - "%CMD_IN_ENV% if [ -n "$GITLAB_API_KEY" ]; then"
+#  - "%CMD_IN_ENV% if [ -n "$GITLAB_API_KEY" ]; then"
 #    if [ -n "$GITLAB_API_KEY" ]; then
   - "%CMD_IN_ENV%   git checkout --orphan gh-pages"
   - "%CMD_IN_ENV%   git rm -rf --cached ."
@@ -73,7 +73,6 @@ on_success:
   - "%CMD_IN_ENV%   git -c user.name='travis' -c user.email='travis' commit -m init"
   - "%CMD_IN_ENV%   git push -f -q https://$GITLAB_USER:$GITLAB_API_KEY@gitlab.com/$TRAVIS_REPO_SLUG gh-pages"
   - "%CMD_IN_ENV%   codecov -e $PYTHON_VERSION"
-  - "%CMD_IN_ENV%  fi"
 
 
 #after_success:
