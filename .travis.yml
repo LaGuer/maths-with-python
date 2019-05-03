@@ -92,11 +92,12 @@ before_install:
   - pwd
   - ls
 #  - "SET PATH=%CONDA_INSTALL_LOCN%;%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - choco install miniconda3"
+  - choco install miniconda3
   - python -m pip install --upgrade setuptools pip
   - python3 -m pip install virtualenv
   - python3 -m virtualenv -p $(which python$TRAVIS_PYTHON_VERSION) ~/travis-env
   - source ~/travis-env/bin/activate
+  - bash find / -name "conda" -print
 #  - conda info -a
 
 install: 
