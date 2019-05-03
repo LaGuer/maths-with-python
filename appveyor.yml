@@ -51,7 +51,7 @@ test_script:
 #  - pytest --pylint --pylint-rcfile=.pyrcfile --pylint-error-types=EF 
 
 on_success:
-  - pytest --pylint --pylint-rcfile=.pyrcfile --pylint-error-types=EF
+  - pytest --pylint --pylint-rcfile=.pyrcfile #--pylint-error-types=EF
 #  - pytest --cov=splinart tests
   - codecov -e $PYTHON_VERSION
   - "%CMD_IN_ENV% python conf.py"
