@@ -164,7 +164,7 @@ after_success: |
     python conf.py
     git rm -rf --cached .
     rm ./docs/index.html
-    cp *.html docs/
+    ls ; ls docs/ ; ls latex/
     mv *.tex docs/
     tectonic docs/latex_chapter.tex --print && tectonic docs/FirstYearComputing_Master.tex --print 
     git add -f --ignore-errors images/ *.html docs/
