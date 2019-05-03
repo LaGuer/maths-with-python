@@ -30,7 +30,7 @@ install:
 #  - "%CMD_IN_ENV%  conda install -y -c anaconda jupyter"
 #  - $HOME/miniconda/bin/conda install -y -c conda-forge jupyter_latex_envs nbformat tectonic
 #  - $HOME/miniconda/bin/conda install -y -c conda-forge nbformat
-  - "%CMD_IN_ENV%  pip install wget jupyter nose coverage pytest pylint pytest-pylint pytest-cov codecov"
+  - "%CMD_IN_ENV%  pip install wget jupyter tectonic nose coverage pytest pylint pytest-pylint pytest-cov codecov"
   - "%CMD_IN_ENV%  pip install -r requirements.txt"
   - "%CMD_IN_ENV%  jupyter nbextension enable --py widgetsnbextension"
 #  - "%CMD_IN_ENV%  python -m wget https://github.com/laguer/slideshow/archive/3.8.0.zip"
