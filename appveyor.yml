@@ -65,7 +65,8 @@ on_success:
 #    if [ -n "$GITLAB_API_KEY" ]; then
   - "%CMD_IN_ENV%   git checkout --orphan gh-pages"
   - "%CMD_IN_ENV%   git rm -rf --cached ."
-  - "%CMD_IN_ENV%   rm ./docs/index.html"
+#  - "%CMD_IN_ENV%   rm ./docs/index.html"
+  - "%CMD_IN_ENV%   mkdir docs"
   - "%CMD_IN_ENV%   cp *.html docs/"
   - "%CMD_IN_ENV%   cp *.tex docs/"
   - "%CMD_IN_ENV%   tectonic docs/*.tex --print"
