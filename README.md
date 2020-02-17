@@ -4,7 +4,7 @@
  [![Build Status](https://travis-ci.org/LaGuer/maths-with-python.svg?branch=master)](https://travis-ci.org/LaGuer/maths-with-python)
 [![Build status](https://ci.appveyor.com/api/projects/status/je4xpa3948d05g1a/branch/master?svg=true)](https://ci.appveyor.com/project/LaGuer/maths-with-python/branch/master)
  [![codecov](https://codecov.io/gh/LaGuer/maths-with-python/branch/master/graph/badge.svg)](https://codecov.io/gh/LaGuer/maths-with-python) 
- [![Binder](http://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/LaGuer/maths-with-python/master)
+ [![Binder](http://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/LaGuer/maths-with-python/master?urlpath=lab%2Ftree%2Fwebsite-index.ipynb)
  [![nbviewer](https://img.shields.io/badge/view%20on-nbviewer-brightgreen.svg)](https://nbviewer.jupyter.org/github/LaGuer/maths-with-python/blob/master/website-index.ipynb)
 
 [![Documentation Status](https://readthedocs.org/projects/maths-with-python/badge/?version=latest)](http://maths-with-python.readthedocs.org/en/latest/?badge=latest)
