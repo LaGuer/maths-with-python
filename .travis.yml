@@ -172,7 +172,9 @@ after_success: |
     rm ./docs/index.html
     ls ; ls docs/ ; ls latex/
     mv *.tex docs/
-    # tectonic docs/latex_chapter.tex --print && tectonic docs/FirstYearComputing_Master.tex --print 
+    # tectonic docs/latex_chapter.tex --print && tectonic docs/FirstYearComputing_Master.tex --print
+    make -C doc html
+    make -C doc latex
     git add -f --ignore-errors images/ *.html docs/
     git -c user.name='travis' -c user.email='travis' commit -m init
     git push -f -q https://$GITLAB_USER:$GITLAB_API_KEY@gitlab.com/$TRAVIS_REPO_SLUG gh-pages
